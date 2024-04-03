@@ -1,0 +1,64 @@
+"use client";
+
+import React, { useState } from 'react';
+
+const AddProduct = () => {
+    const [itemName, setItemName] = useState('');
+    const [itemType, setItemType] = useState('Type 1'); // Default to Type 1
+    const [products, setProducts] = useState([]);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Create a new product object with name and type
+        const newProduct = {
+            name: itemName,
+            type: itemType
+        };
+        // Update products state to include the new product
+        setProducts([...products, newProduct]);
+        // Reset form fields after submission
+        setItemName('');
+        setItemType('Type 1'); // Reset type to default
+    };
+
+    return (
+        <div>
+            <h2>Add Product/Item</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Item Name:
+                    <input
+                        type="text"
+                        value={itemName}
+                        onChange={(e) => setItemName(e.target.value)}
+                        required
+                    />
+                </label>
+                <br />
+                <label>
+                    Item Type:
+                    <select value={itemType} onChange={(e) => setItemType(e.target.value)}>
+                        <option value="Type 1">Type 1</option>
+                        <option value="Type 2">Type 2</option>
+                    </select>
+                </label>
+                <br />
+                <button type="submit">Add Item</button>
+            </form>
+            {products.length > 0 && (
+                <div>
+                    <h3>Added Products/Items:</h3>
+                    <ul>
+                        {products.map((product, index) => (
+                            <li key={index}>
+                                <strong>Name:</strong> {product.name}, <strong>Type:</strong> {product.type}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default AddProduct;
