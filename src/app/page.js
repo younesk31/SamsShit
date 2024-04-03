@@ -1,9 +1,9 @@
 "use client"; // This is a client component 👈🏽
 
 import React, { useState } from "react";
-import ClientIDsPage from "./ClientIDsPage";
-import ClientIDActions from "./ClientIDActions";
-import ClientIDCreation from "./ClientIDCreation";
+import ClientIDsPage from "./components/ClientIDsPage";
+import ClientIDActions from "./components/ClientIDActions";
+import ClientIDCreation from "./components/ClientIDCreation";
 
 const Page = () => {
   const [selectedClientID, setSelectedClientID] = useState(null);
@@ -30,6 +30,11 @@ const Page = () => {
 
   return (
     <div>
+      {/* Render the "Add New Client ID" section first */}
+      <h2>Add New Client ID</h2>
+      <ClientIDCreation onAddClientID={handleAddClientID} />
+
+      {/* Then, render the "Existing Client IDs" section */}
       {selectedClientID ? (
         <ClientIDActions
           clientID={selectedClientID}
@@ -40,11 +45,7 @@ const Page = () => {
           onBack={handleBackToClientIDs}
         />
       ) : (
-        <div>
-          <ClientIDsPage clientIDs={clientIDs} onSelectClient={handleSelectClient} />
-          <h2>Add New Client ID</h2>
-          <ClientIDCreation onAddClientID={handleAddClientID} />
-        </div>
+        <ClientIDsPage clientIDs={clientIDs} onSelectClient={handleSelectClient} />
       )}
     </div>
   );
