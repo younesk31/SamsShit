@@ -1,4 +1,4 @@
-"use client"; // This is a client component 👈🏽
+"use client";
 import React from "react";
 
 const ClientIDActions = ({ clientID, items, onWithdraw, onAddItem, onMoveOut, onBack }) => {
