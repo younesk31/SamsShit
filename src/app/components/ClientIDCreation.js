@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const ClientIDCreation = ({ onAddClientID }) => {
+const ClientIDCreation = ({ onAddClientID, onBack }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
@@ -14,6 +14,7 @@ const ClientIDCreation = ({ onAddClientID }) => {
 
   return (
     <div>
+      <h2>Add New Client</h2>
       <form onSubmit={handleSubmit}>
         <label>
           First Name:
@@ -26,6 +27,10 @@ const ClientIDCreation = ({ onAddClientID }) => {
         </label>
         <br />
         <button type="submit">Add Client ID</button>
+        <br />
+        <br />
+        <br />
+        <button onClick={onBack}>Back</button>
       </form>
     </div>
   );

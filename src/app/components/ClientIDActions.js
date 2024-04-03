@@ -6,7 +6,7 @@ const ClientIDActions = ({ clientID, items, onWithdraw, onAddItem, onMoveOut, on
 
   return (
     <div>
-      <h2>Actions for Client ID: {clientID}</h2>
+      <h2>Actions for Client ID: {`${clientID.firstName} - ${clientID.lastName}`}</h2>
       {hasItems ? (
         <div>
           <button onClick={onWithdraw}>Withdraw</button>
@@ -16,6 +16,10 @@ const ClientIDActions = ({ clientID, items, onWithdraw, onAddItem, onMoveOut, on
       ) : (
         <div>
           <button onClick={onAddItem}>Add Items</button>
+          <br />
+          <br />
+          <br />
+          <button onClick={onBack}>Back</button>
         </div>
       )}
     </div>
