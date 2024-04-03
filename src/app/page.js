@@ -7,7 +7,7 @@ import ClientIDCreation from "./components/ClientIDCreation";
 
 const Page = () => {
   const [selectedClientID, setSelectedClientID] = useState(null);
-  const [clientIDs, setClientIDs] = useState([]);
+  const [clientIDs, setClientIDs] = useState({});
   const [nextID, setNextID] = useState(1); // Initialize the next ID to 1
 
   const handleSelectClient = (clientID) => {
@@ -19,13 +19,18 @@ const Page = () => {
   };
 
   const handleAddClientID = (firstName, lastName) => {
-    const newClient = {
-      id: nextID,
-      firstName: firstName,
-      lastName: lastName,
-    };
-    setClientIDs([...clientIDs, newClient]);
-    setNextID(nextID + 1);
+    const clientKey = `${firstName}-${lastName}`;
+    if (!clientIDs[clientKey]) {
+      const newClient = {
+        id: nextID,
+        firstName: firstName,
+        lastName: lastName,
+      };
+      setClientIDs({ ...clientIDs, [clientKey]: newClient });
+      setNextID(nextID + 1);
+    } else {
+      alert("Client already exists");
+    }
   };
 
   return (
@@ -45,7 +50,7 @@ const Page = () => {
           onBack={handleBackToClientIDs}
         />
       ) : (
-        <ClientIDsPage clientIDs={clientIDs} onSelectClient={handleSelectClient} />
+        <ClientIDsPage clientIDs={Object.values(clientIDs)} onSelectClient={handleSelectClient} />
       )}
     </div>
   );
